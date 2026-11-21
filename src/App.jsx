@@ -23,6 +23,7 @@ export default function App() {
           alt={slide.alt}
           priority={index === 0}
           isFirst={index === 0}
+          isSecond={index === 1}
         />
       ))}
     </main>

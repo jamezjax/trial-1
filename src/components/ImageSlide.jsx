@@ -11,10 +11,16 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
  *   - Zero gaps between sections: bottom of page N touches top of page N+1 directly.
  *   - Smooth scroll-linked spring inertia connects the flow seamlessly as you scroll down.
  * - Animation intensity boosted by 10% (vertical travel expanded from 25px to 27.5px).
- * - On the first page (isFirst = true), includes an interactive hotspot link over the logo
- *   directing to the official Instagram profile.
+ * - Page 1: Interactive hotspot link over the logo directing to ASCENSO Instagram profile.
+ * - Page 2: Small Instagram cursive script logo at bottom-right corner directing to Anjana's profile.
  */
-export default function ImageSlide({ src, alt, priority = false, isFirst = false }) {
+export default function ImageSlide({
+  src,
+  alt,
+  priority = false,
+  isFirst = false,
+  isSecond = false,
+}) {
   const containerRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -26,12 +32,12 @@ export default function ImageSlide({ src, alt, priority = false, isFirst = false
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 90,
     damping: 28,
-    mass: 0.8,
+    mass: 0.9,
     restDelta: 0.0005,
   });
 
   // Seamless joint transition:
-  // Vertical momentum increased by 10% (+27.5px -> 0px -> -27.5px) for a slightly more intensive scroll feel
+  // Vertical momentum (+27.5px -> 0px -> -27.5px)
   const y = useTransform(smoothProgress, [0, 0.5, 1], [27.5, 0, -27.5]);
 
   return (
@@ -59,6 +65,23 @@ export default function ImageSlide({ src, alt, priority = false, isFirst = false
             title="Follow ASCENSO on Instagram (@asce.nso2026)"
             aria-label="ASCENSO Instagram Profile"
           />
+        )}
+
+        {isSecond && (
+          <a
+            href="https://www.instagram.com/anjanah1035?gwpx=dmpnMGxpbDN3YWJ6"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="page2-instagram-link"
+            title="Follow Anjana on Instagram (@anjanah1035)"
+            aria-label="Anjana Instagram Profile"
+          >
+            <img
+              src="/instagram-logo.png"
+              alt="Instagram"
+              className="page2-instagram-img"
+            />
+          </a>
         )}
       </motion.div>
     </section>
