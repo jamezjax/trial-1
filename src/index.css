@@ -120,8 +120,8 @@ html, body {
   transform: translateX(-50%) scale(0.96);
 }
 
-/* Small Instagram logo link at the bottom-right of page 2 */
-.page2-instagram-link {
+/* Small Instagram logo link at the bottom-right of individual slides */
+.page-instagram-link {
   position: absolute;
   bottom: 24px;
   right: 36px;
@@ -135,7 +135,7 @@ html, body {
   opacity: 0.88;
 }
 
-.page2-instagram-img {
+.page-instagram-img {
   width: 92px;
   height: auto;
   display: block;
@@ -144,21 +144,21 @@ html, body {
   filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.15));
 }
 
-.page2-instagram-link:hover {
+.page-instagram-link:hover {
   opacity: 1;
   transform: scale(1.08);
 }
 
-.page2-instagram-link:active {
+.page-instagram-link:active {
   transform: scale(0.96);
 }
 
 @media (max-width: 768px) {
-  .page2-instagram-link {
+  .page-instagram-link {
     bottom: 16px;
     right: 20px;
   }
-  .page2-instagram-img {
+  .page-instagram-img {
     width: 75px;
   }
 }

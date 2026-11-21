@@ -12,14 +12,15 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
  *   - Smooth scroll-linked spring inertia connects the flow seamlessly as you scroll down.
  * - Animation intensity boosted by 10% (vertical travel expanded from 25px to 27.5px).
  * - Page 1: Interactive hotspot link over the logo directing to ASCENSO Instagram profile.
- * - Page 2: Small Instagram cursive script logo at bottom-right corner directing to Anjana's profile.
+ * - Profile Pages: Small Instagram cursive script logo at bottom-right corner directing to the person's profile.
  */
 export default function ImageSlide({
   src,
   alt,
   priority = false,
   isFirst = false,
-  isSecond = false,
+  instagramLink = null,
+  instagramTitle = 'Instagram Profile',
 }) {
   const containerRef = useRef(null);
 
@@ -67,19 +68,19 @@ export default function ImageSlide({
           />
         )}
 
-        {isSecond && (
+        {instagramLink && (
           <a
-            href="https://www.instagram.com/anjanah1035?gwpx=dmpnMGxpbDN3YWJ6"
+            href={instagramLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="page2-instagram-link"
-            title="Follow Anjana on Instagram (@anjanah1035)"
-            aria-label="Anjana Instagram Profile"
+            className="page-instagram-link"
+            title={instagramTitle}
+            aria-label={instagramTitle}
           >
             <img
               src="/instagram-logo.png"
               alt="Instagram"
-              className="page2-instagram-img"
+              className="page-instagram-img"
             />
           </a>
         )}
