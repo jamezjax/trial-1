@@ -10,6 +10,7 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
  *   - Opacity remains constant 1 (solid image at all times) so no black background shows through.
  *   - Zero gaps between sections: bottom of page N touches top of page N+1 directly.
  *   - Smooth scroll-linked spring inertia connects the flow seamlessly as you scroll down.
+ * - Animation intensity boosted by 10% (vertical travel expanded from 25px to 27.5px).
  * - On the first page (isFirst = true), includes an interactive hotspot link over the logo
  *   directing to the official Instagram profile.
  */
@@ -30,8 +31,8 @@ export default function ImageSlide({ src, alt, priority = false, isFirst = false
   });
 
   // Seamless joint transition:
-  // Subtle vertical momentum (+25px -> 0px -> -25px) that maintains continuous contact between pages
-  const y = useTransform(smoothProgress, [0, 0.5, 1], [25, 0, -25]);
+  // Vertical momentum increased by 10% (+27.5px -> 0px -> -27.5px) for a slightly more intensive scroll feel
+  const y = useTransform(smoothProgress, [0, 0.5, 1], [27.5, 0, -27.5]);
 
   return (
     <section ref={containerRef} className="slide-section">
