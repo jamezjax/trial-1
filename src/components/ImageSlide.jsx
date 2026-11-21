@@ -4,10 +4,12 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 /**
  * ImageSlide Component
  * 
- * - Fullscreen Stretch: Fills the entire screen (100vw x 100vh, object-fit: cover) with 0 gaps.
- * - Deep Blend Transition: 
- *   Cross-blends continuously with smooth opacity curve, subtle parallax vertical glide,
- *   gentle zoom breathing, and micro-blur at boundaries for an organic blended flow.
+ * - Seamlessly Joined Full-Screen Presentation:
+ *   - The entire image stretches to 100% width and 100% height (`object-fit: fill`),
+ *     filling every pixel and eliminating any letterbox margins or black bands.
+ *   - Opacity remains constant 1 (solid image at all times) so no black background shows through.
+ *   - Zero gaps between sections: bottom of page N touches top of page N+1 directly.
+ *   - Smooth scroll-linked spring inertia connects the flow seamlessly as you scroll down.
  */
 export default function ImageSlide({ src, alt, priority = false }) {
   const containerRef = useRef(null);
@@ -17,30 +19,17 @@ export default function ImageSlide({ src, alt, priority = false }) {
     offset: ['start end', 'end start'],
   });
 
-  // Soft physics-based spring for organic blending inertia
+  // Smooth scroll spring physics
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 85,
-    damping: 26,
-    mass: 0.75,
+    stiffness: 90,
+    damping: 28,
+    mass: 0.8,
     restDelta: 0.0005,
   });
 
-  // Parallax glide: slides smoothly into viewport and continues past
-  const y = useTransform(smoothProgress, [0, 0.5, 1], ['12%', '0%', '-12%']);
-
-  // Seamless cross-fade opacity blend: soft transition into full focus at center
-  const opacity = useTransform(
-    smoothProgress,
-    [0, 0.25, 0.5, 0.75, 1],
-    [0.1, 0.85, 1, 0.85, 0.1]
-  );
-
-  // Gentle scale depth transition (1.06 -> 1.0 -> 1.06) to enrich blending depth
-  const scale = useTransform(
-    smoothProgress,
-    [0, 0.5, 1],
-    [1.05, 1, 1.05]
-  );
+  // Seamless joint transition:
+  // Subtle vertical momentum (+25px -> 0px -> -25px) that maintains continuous contact between pages
+  const y = useTransform(smoothProgress, [0, 0.5, 1], [25, 0, -25]);
 
   return (
     <section ref={containerRef} className="slide-section">
@@ -48,8 +37,6 @@ export default function ImageSlide({ src, alt, priority = false }) {
         className="slide-wrapper"
         style={{
           y,
-          opacity,
-          scale,
         }}
       >
         <img
