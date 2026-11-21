@@ -7,8 +7,8 @@
 html, body {
   width: 100%;
   min-height: 100%;
-  background-color: #ffffff;
-  color: #111111;
+  background-color: #0b0c10;
+  color: #ffffff;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   overflow-x: hidden;
   scroll-behavior: auto;
@@ -16,23 +16,23 @@ html, body {
 
 /* Minimal subtle scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #ffffff;
+  background: #0b0c10;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d1d5db;
+  background: #2a2d34;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+  background: #454955;
 }
 
-/* Seamless presentation container - continuous vertical strip with zero gaps */
+/* Fullscreen continuous presentation container */
 .presentation-container {
   width: 100%;
   display: flex;
@@ -40,15 +40,14 @@ html, body {
   padding: 0;
   margin: 0;
   gap: 0;
-  background-color: #ffffff;
+  background-color: #0b0c10;
 }
 
-/* Slide section: perfectly flush, borderless, zero spacing */
+/* Each slide fills the entire web screen (100vw x 100vh) */
 .slide-section {
   width: 100vw;
-  height: calc(100vw / (16 / 9));
-  min-height: calc(100vw / (16 / 9));
-  max-height: 100vh;
+  height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,34 +56,29 @@ html, body {
   padding: 0;
   margin: 0;
   border: none;
-  background-color: #ffffff;
-}
-
-/* Responsive lock for standard 16:9 monitor screens */
-@media (min-aspect-ratio: 16/9) {
-  .slide-section {
-    width: 100vw;
-    height: 100vh;
-    min-height: 100vh;
-  }
+  background-color: transparent;
 }
 
 .slide-wrapper {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0;
   padding: 0;
-  will-change: transform, opacity;
+  will-change: transform, opacity, filter;
 }
 
-/* The complete unmodified presentation image - completely fills the 16:9 slot edge-to-edge */
+/* Stretch the page to fill the web screen completely (100% width and height) so it blends seamlessly */
 .slide-image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center;
   display: block;
   user-select: none;
   -webkit-user-drag: none;
