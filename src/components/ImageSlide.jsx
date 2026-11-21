@@ -10,8 +10,10 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
  *   - Opacity remains constant 1 (solid image at all times) so no black background shows through.
  *   - Zero gaps between sections: bottom of page N touches top of page N+1 directly.
  *   - Smooth scroll-linked spring inertia connects the flow seamlessly as you scroll down.
+ * - On the first page (isFirst = true), includes an interactive hotspot link over the logo
+ *   directing to the official Instagram profile.
  */
-export default function ImageSlide({ src, alt, priority = false }) {
+export default function ImageSlide({ src, alt, priority = false, isFirst = false }) {
   const containerRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -46,6 +48,17 @@ export default function ImageSlide({ src, alt, priority = false }) {
           loading={priority ? 'eager' : 'lazy'}
           decoding="async"
         />
+
+        {isFirst && (
+          <a
+            href="https://www.instagram.com/asce.nso2026?dmpr=MTBuZGg0NTk3M2RwMA=="
+            target="_blank"
+            rel="noopener noreferrer"
+            className="logo-hotspot"
+            title="Follow ASCENSO on Instagram (@asce.nso2026)"
+            aria-label="ASCENSO Instagram Profile"
+          />
+        )}
       </motion.div>
     </section>
   );

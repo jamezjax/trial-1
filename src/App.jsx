@@ -22,6 +22,7 @@ export default function App() {
           src={slide.src}
           alt={slide.alt}
           priority={index === 0}
+          isFirst={index === 0}
         />
       ))}
     </main>

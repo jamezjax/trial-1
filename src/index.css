@@ -91,3 +91,31 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
+/* Interactive clickable logo hotspot on the first page */
+.logo-hotspot {
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14vw;
+  max-width: 180px;
+  min-width: 90px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  z-index: 10;
+  cursor: pointer;
+  background: transparent;
+  outline: none;
+  border: none;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+.logo-hotspot:hover {
+  transform: translateX(-50%) scale(1.06);
+  box-shadow: 0 0 25px rgba(212, 160, 23, 0.45);
+}
+
+.logo-hotspot:active {
+  transform: translateX(-50%) scale(0.96);
+}
